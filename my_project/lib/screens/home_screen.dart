@@ -30,31 +30,35 @@ class _HomescreenState extends State<Homescreen> {
                     itemCount: state.items.length,
                     itemBuilder: (context, index) {
                       final item = state.items[index];
-                      return ListTile(
-                        title: Text(item.username),
-                        subtitle: Text(item
-                            .description), // Assuming Item has a 'name' property
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.edit),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            EditScreen(idValue: item.id)));
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () {
-                                BlocProvider.of<ItemBloc>(context)
-                                    .add(DeleteItem(item.id));
-                              },
-                            ),
-                          ],
+                      return Card(
+                        child: ListTile(
+                          title: Text(item.username),
+                          subtitle: Text(item
+                              .description), // Assuming Item has a 'name' property
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                color: Colors.blue,
+                                icon: const Icon(Icons.edit),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditScreen(idValue: item.id)));
+                                },
+                              ),
+                              IconButton(
+                                color: Colors.red,
+                                icon: const Icon(Icons.delete),
+                                onPressed: () {
+                                  BlocProvider.of<ItemBloc>(context)
+                                      .add(DeleteItem(item.id));
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
